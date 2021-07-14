@@ -3,7 +3,14 @@
     <el-container>
       <!-- header -->
       <el-header style="padding: 0" v-if="logined">
-        <el-menu class="el-menu-demo"  mode="horizontal" @select="handleSelect"  background-color="#545c64"  text-color="#fff" active-text-color="#ffd04b">
+        <el-menu
+          class="el-menu-demo"
+          mode="horizontal"
+          @select="handleSelect"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+        >
           <el-menu-item index="1">处理中心</el-menu-item>
           <el-submenu index="2">
             <template slot="title">我的工作台</template>
@@ -28,17 +35,38 @@
 
       <el-container>
         <!-- left-side -->
-        <el-aside width="200px" style="height: calc(100vh - 60px)" v-if="logined" >
+        <el-aside
+          width="200px"
+          style="height: calc(100vh - 60px)"
+          v-if="logined"
+        >
           <el-row class="tac">
             <el-col :span="24">
-              <el-menu router default-active="2" class="el-menu-vertical-demo"  @open="handleOpen" close="handleClose" background-color="#545c64"  text-color="#fff"  active-text-color="#ffd04b" >
-                <el-submenu  v-for="(item, index) in navs" :index="item.id" :key="index">
+              <el-menu
+                router
+                default-active="2"
+                class="el-menu-vertical-demo"
+                @open="handleOpen"
+                close="handleClose"
+                background-color="#545c64"
+                text-color="#fff"
+                active-text-color="#ffd04b"
+              >
+                <el-submenu
+                  v-for="(item, index) in navs"
+                  :index="item.id"
+                  :key="index"
+                >
                   <template style="padding: 0" slot="title">
                     <i :class="item.icon"></i>
                     <span>{{ item.name }}</span>
                   </template>
                   <el-menu-item-group>
-                    <el-menu-item v-for="(item2, index2) in item.list" :index="item2.url" :key="index2"  >
+                    <el-menu-item
+                      v-for="(item2, index2) in item.list"
+                      :index="item2.url"
+                      :key="index2"
+                    >
                       {{ item2.name }}
                     </el-menu-item>
                   </el-menu-item-group>
@@ -49,13 +77,10 @@
         </el-aside>
 
         <el-main>
-          <router-view  v-if="isrefresh"/>
+          <router-view v-if="isrefresh" />
         </el-main>
-
       </el-container>
     </el-container>
-
-   
   </div>
 </template>
 
@@ -76,7 +101,7 @@ export default {
 
   data() {
     return {
-      isrefresh:true,
+      isrefresh: true,
       logined: false,
 
       activeIndex: "1",
@@ -98,11 +123,15 @@ export default {
             {
               name: "角色管理",
               url: "/",
-            },{
+            },
+            {
               name: "日志管理",
               url: "/log",
-            }
-          ]
+            },{
+              name: "字典管理",
+              url: "/dict",
+            },
+          ],
         },
         {
           id: "2",
@@ -112,29 +141,28 @@ export default {
             {
               name: "日志查看",
               url: "/",
-            },{
+            },
+            {
               name: "日志统计",
               url: "",
             },
-          ]
-        }
-      ]
+          ],
+        },
+      ],
     };
   },
-  provide(){
+  provide() {
     return {
-      myrefresh:this.refresh
-    }
+      myrefresh: this.refresh,
+    };
   },
   methods: {
-    refresh(){
+    refresh() {
       this.isrefresh = false;
-      this.$nextTick(()=>{
-      this.isrefresh = true;
-
+      this.$nextTick(() => {
+        this.isrefresh = true;
       });
     },
-
 
     handleSelect(key, keyPath) {
       console.log(key, keyPath);

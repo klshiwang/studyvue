@@ -22,6 +22,10 @@ const routes = [
     path: '/log',
     name: '日志管理',
     component: () => import(/* webpackChunkName: "log" */ '../views/log.vue')
+  },{
+    path: '/dict',
+    name: '字典管理',
+    component: () => import(/* webpackChunkName: "dict" */ '../views/dict.vue')
   }
 ]
 

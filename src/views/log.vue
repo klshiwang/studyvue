@@ -17,7 +17,7 @@
       </el-form-item>
 
       <el-form-item label="日志标题">
-        <el-input v-model="formInline.user" placeholder="日志标题"></el-input>
+        <el-input v-model="formInline.title" placeholder="日志标题"></el-input>
       </el-form-item>
 
       <el-form-item label="时间范围">
@@ -35,7 +35,7 @@
         <el-button type="primary" icon="el-icon-search" @click="onSubmit">搜索</el-button >
       </el-form-item>
       <el-form-item>
-        <el-button type="default" icon="el-icon-refresh-left">重置</el-button>
+        <el-button type="default" icon="el-icon-refresh-left" @click="reset">重置</el-button>
       </el-form-item>
     </el-form>
 
@@ -51,9 +51,9 @@
         ></el-table-column>
         <el-table-column prop="type" label="日志类型" width="180">
           <template slot-scope="scope">
-            <span v-show="scope.row.type == 1">系统日志</span>
-            <span v-show="scope.row.type == 2">登陆日志</span>
-            <span v-show="scope.row.type == 3">操作日志</span>
+            <span v-show="scope.row.type == '1'">系统日志</span>
+            <span v-show="scope.row.type == '2'">登陆日志</span>
+            <span v-show="scope.row.type == '3'">操作日志</span>
           </template>
         </el-table-column>
         <el-table-column prop="text" label="日志内容"> </el-table-column>
@@ -81,18 +81,18 @@ export default {
   data() {
     return {
       formInline: {
-        user: "",
+        title: "",
         options: [
           {
-            value: 1,
+            value: "1",
             label: "系统日志",
           },
           {
-            value: 2,
+            value: "2",
             label: "登陆日志",
           },
           {
-            value: 3,
+            value: "3",
             label: "操作日志",
           },
         ],
@@ -102,35 +102,35 @@ export default {
       tableData: [
         {
           title: "系统登陆",
-          type: 1,
+          type: "1",
+          text: "宏方红登陆系统。",
+          IP: "192.168.0.1",
+          time: "2021-07-14 10:00",
+        },
+        {
+          title: "自动登陆",
+          type: "1",
           text: "宏方红登陆系统。",
           IP: "192.168.0.1",
           time: "2021-07-14 10:00",
         },
         {
           title: "系统登陆",
-          type: 1,
+          type: "1",
           text: "宏方红登陆系统。",
           IP: "192.168.0.1",
           time: "2021-07-14 10:00",
         },
         {
           title: "系统登陆",
-          type: 1,
+          type: "3",
           text: "宏方红登陆系统。",
           IP: "192.168.0.1",
           time: "2021-07-14 10:00",
         },
         {
-          title: "系统登陆",
-          type: 3,
-          text: "宏方红登陆系统。",
-          IP: "192.168.0.1",
-          time: "2021-07-14 10:00",
-        },
-        {
-          title: "系统登陆",
-          type: 2,
+          title: "用户登陆",
+          type: "2",
           text: "宏方红登陆系统。",
           IP: "192.168.0.1",
           time: "2021-07-14 10:00",
@@ -172,9 +172,62 @@ export default {
       value2: "",
     };
   },
+  inject:["myrefresh"],
   methods: {
+    reset(){
+      // 第一种重置方法
+      this.myrefresh();
+
+      // 第二种重置方法
+      /*
+      this.tableData = [
+        {
+          title: "系统登陆",
+          type: "1",
+          text: "宏方红登陆系统。",
+          IP: "192.168.0.1",
+          time: "2021-07-14 10:00",
+        },
+        {
+          title: "自动登陆",
+          type: "1",
+          text: "宏方红登陆系统。",
+          IP: "192.168.0.1",
+          time: "2021-07-14 10:00",
+        },
+        {
+          title: "系统登陆",
+          type: "1",
+          text: "宏方红登陆系统。",
+          IP: "192.168.0.1",
+          time: "2021-07-14 10:00",
+        },
+        {
+          title: "系统登陆",
+          type: "3",
+          text: "宏方红登陆系统。",
+          IP: "192.168.0.1",
+          time: "2021-07-14 10:00",
+        },
+        {
+          title: "用户登陆",
+          type: "2",
+          text: "宏方红登陆系统。",
+          IP: "192.168.0.1",
+          time: "2021-07-14 10:00",
+        },
+      ]
+      */
+    },
     onSubmit() {
-      console.log("submit!");
+      console.log(this.value);
+      let s_arr=[];
+      this.tableData.map((i,s)=>{
+        if(i.type === this.value && i.title === this.formInline.title){
+          s_arr.push(i);
+        }
+        this.tableData = s_arr;
+      });
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
