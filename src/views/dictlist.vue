@@ -39,8 +39,8 @@
         </el-table-column>
         <el-table-column prop="status" label="状态"> 
             <template slot-scope="scope">
-                <span v-show="scope.row.status == '1'" style="color:green">正常</span>
-                <span v-show="scope.row.status == '2'" style="color:red">禁用</span>
+                <span v-show="scope.row.status == '1'">正常</span>
+                <span v-show="scope.row.status == '2'">禁用</span>
             </template>
         </el-table-column>
         <el-table-column prop="remark" label="备注"> </el-table-column>
@@ -48,7 +48,7 @@
         <el-table-column prop="operate" label="操作">
           <template slot-scope="scope">
              <el-link :underline="false" style="margin:10px" class="el-icon-edit">编辑</el-link>
-             <el-link :underline="false" style="margin:10px" class="el-icon-s-operation" @click="getList(scope.row)">列表</el-link>
+             <el-link :underline="false" style="margin:10px" class="el-icon-s-operation">列表</el-link>
              <el-link :underline="false" style="margin:10px" class="el-icon-delete" @click="del(scope.row,scope.$index)">删除</el-link>
           </template>
         </el-table-column>
@@ -127,44 +127,73 @@ export default {
             remark: "备注备注",
             time: "2021-07-14 10:00",
         },
-      tableData: [
-        {   id:"1",
-            dname: "具体工种",
+      tableData:[],
+      tableData1: [
+        {
+            dname: "tableData1",
             code: "sys_activity_type",
             status: "1",
             remark: "备注备注",
             time: "2021-07-14 10:00",
         },
         {
-            id:"2",
-            dname: "活动类型",
+            dname: "tableData1",
             code: "sys_activity_type",
             status: "1",
             remark: "备注备注",
             time: "2021-07-14 10:00",
         },
         {
-            id:"3",
-            dname: "客户来源",
+            dname: "tableData1",
             code: "sys_customers_source",
             status: "2",
             remark: "备注备注",
             time: "2021-07-14 10:00",
-        },
-        {   id:"1",
-            dname: "活动类型",
+        }
+      ],tableData2: [
+        {
+            dname: "tableData2",
             code: "sys_activity_type",
             status: "1",
             remark: "备注备注",
             time: "2021-07-14 10:00",
         },
-        {   id:"3",
-            dname: "具体工种",
-            code: "sys_customers_work",
-            status: "2",
+        {
+            dname: "tableData2",
+            code: "sys_activity_type",
+            status: "1",
             remark: "备注备注",
             time: "2021-07-14 10:00",
         },
+        {
+            dname: "tableData2",
+            code: "sys_customers_source",
+            status: "2",
+            remark: "备注备注",
+            time: "2021-07-14 10:00",
+        }
+      ],tableData3: [
+        {
+            dname: "tableData3",
+            code: "sys_activity_type",
+            status: "1",
+            remark: "备注备注",
+            time: "2021-07-14 10:00",
+        },
+        {
+            dname: "tableData3",
+            code: "sys_activity_type",
+            status: "1",
+            remark: "备注备注",
+            time: "2021-07-14 10:00",
+        },
+        {
+            dname: "tableData3",
+            code: "sys_customers_source",
+            status: "2",
+            remark: "备注备注",
+            time: "2021-07-14 10:00",
+        }
       ],
       currentPage4: 1,
       pickerOptions: {
@@ -202,27 +231,21 @@ export default {
       value2: "",
     };
   },
+  mounted(){
+    // let id = this.$route.query.id;  //接收通过query传来的参数
+
+    let id = this.$route.params.id;   //接收通过params传来的参数
+    if(id === "1"){
+      this.tableData = this.tableData1;
+    }else if(id === "2"){
+      this.tableData = this.tableData2;
+    }else{
+      this.tableData = this.tableData3;
+    }
+    
+  },
   inject: ["myrefresh"],
   methods: {
-      getList(row){
-        console.log(row.id)
-        //1.使用query在地址栏传参数
-        // this.$router.push({
-        //   path:'/dictlist',
-        //   query:{
-        //     id:row.id
-        //   }
-        // })
-        
-        //2.使用params传参数
-        this.$router.push({
-          name:'字典列表',   //params传参跳转路径使用路由中的name
-          params:{
-            id:row.id
-          }
-        })
-
-      },
       del(row,index){
           console.log(index);
           this.tableData.splice(index,1);

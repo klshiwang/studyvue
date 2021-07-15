@@ -6,12 +6,7 @@
     <el-form :inline="true" :model="formInline" class="demo-form-inline search">
       <el-form-item label="日志类型">
         <el-select v-model="value" placeholder="请选择">
-          <el-option
-            v-for="item in formInline.options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          >
+          <el-option v-for="item in formInline.options" :key="item.value"  :label="item.label" :value="item.value">
           </el-option>
         </el-select>
       </el-form-item>

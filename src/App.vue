@@ -114,11 +114,11 @@ export default {
           list: [
             {
               name: "菜单管理",
-              url: "/",
+              url: "/menu",
             },
             {
               name: "用户管理",
-              url: "/about",
+              url: "/user",
             },
             {
               name: "角色管理",
