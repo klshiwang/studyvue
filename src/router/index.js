@@ -35,6 +35,22 @@ const routes = [
     path: '/user',
     name: '用户管理',
     component: () => import(/* webpackChunkName: "user" */ '../views/user.vue')
+  },{
+    path: '/role',
+    name: '角色管理',
+    component: () => import(/* webpackChunkName: "role" */ '../views/role.vue')
+  },{
+    path: '/klbase',
+    name: '知识库管理',
+    component: () => import(/* webpackChunkName: "klbase" */ '../views/klbase.vue')
+  },{
+    path: '/notice',
+    name: '知识库管理',
+    component: () => import(/* webpackChunkName: "notice" */ '../views/notice.vue')
+  },{
+    path: '/salesman',
+    name: '业务员管理',
+    component: () => import(/* webpackChunkName: "salesman" */ '../views/salesman.vue')
   }
 ]
 

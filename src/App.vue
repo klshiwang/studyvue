@@ -42,36 +42,21 @@
         >
           <el-row class="tac">
             <el-col :span="24">
-              <el-menu
-                router
-                default-active="2"
-                class="el-menu-vertical-demo"
-                @open="handleOpen"
-                close="handleClose"
-                background-color="#545c64"
-                text-color="#fff"
-                active-text-color="#ffd04b"
-              >
-                <el-submenu
-                  v-for="(item, index) in navs"
-                  :index="item.id"
-                  :key="index"
-                >
+
+              <el-menu router default-active="2" class="el-menu-vertical-demo" @open="handleOpen" close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+                <el-submenu v-for="(item, index) in navs"  :index="item.id"  :key="index">
                   <template style="padding: 0" slot="title">
                     <i :class="item.icon"></i>
                     <span>{{ item.name }}</span>
                   </template>
                   <el-menu-item-group>
-                    <el-menu-item
-                      v-for="(item2, index2) in item.list"
-                      :index="item2.url"
-                      :key="index2"
-                    >
+                    <el-menu-item v-for="(item2, index2) in item.list" :index="item2.url" :key="index2">
                       {{ item2.name }}
                     </el-menu-item>
                   </el-menu-item-group>
                 </el-submenu>
               </el-menu>
+
             </el-col>
           </el-row>
         </el-aside>
@@ -122,7 +107,7 @@ export default {
             },
             {
               name: "角色管理",
-              url: "/",
+              url: "/role",
             },
             {
               name: "日志管理",
@@ -130,22 +115,25 @@ export default {
             },{
               name: "字典管理",
               url: "/dict",
-            },
+            },{
+              name: "知识库管理",
+              url: "/klbase",
+            },{
+              name: "公告管理",
+              url: "/notice",
+            }
           ],
         },
         {
           id: "2",
-          name: "工作日志",
+          name: "业务员",
           icon: "el-icon-notebook-2",
           list: [
             {
-              name: "日志查看",
-              url: "/",
+              name: "业务员管理",
+              url: "/salesman",
             },
-            {
-              name: "日志统计",
-              url: "",
-            },
+            
           ],
         },
       ],
